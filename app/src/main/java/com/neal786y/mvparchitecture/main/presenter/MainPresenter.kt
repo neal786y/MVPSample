@@ -10,13 +10,16 @@ import retrofit2.Retrofit
 class MainPresenter : BasePresenter<MainView>() {
 
     fun loadNews(retrofit: Retrofit) {
+        mView?.showLoading()
         val mainInteractor = MainInteractor(retrofit);
         mainInteractor.mNewsResponseCallback = object : ResponseCallback<NewsResponse> {
             override fun onSuccess(response: NewsResponse) {
+                mView?.hideLoading()
                 mView?.onLoad(response)
             }
 
             override fun onError(error: Any) {
+                mView?.hideLoading()
                 mView?.onError(error)
             }
         }

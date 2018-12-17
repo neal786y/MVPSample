@@ -4,7 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.neal786y.mvparchitecture.App
 import com.neal786y.mvparchitecture.di.component.ApiComponent
 
@@ -19,4 +21,10 @@ fun AppCompatActivity.isNetworkAvailable(): Boolean {
     val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
     return activeNetwork?.isConnectedOrConnecting == true
+}
+
+fun ImageView.loadImageUrl(url: String){
+    Glide.with(this.context)
+        .load(url)
+        .into(this)
 }
