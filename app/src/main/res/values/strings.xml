@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVPArchitecture</string>
+    <string name="article_image_description">Article Image Description</string>
 </resources>

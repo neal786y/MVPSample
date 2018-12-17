@@ -36,9 +36,13 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
         component.inject(this)
 
         initView()
+    }
 
+    override fun onResume() {
+        super.onResume()
         if(isNetworkAvailable()) onNetworkAvailable()
         else onNetworkLost()
+
     }
 
     private fun initView() {
