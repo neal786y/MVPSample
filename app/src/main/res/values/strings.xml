@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">MVPArchitecture</string>
     <string name="article_image_description">Article Image Description</string>
+    <string name="default_source">google-news-in</string>
+    <string name="no_internet_text">No internet connection</string>
+    <string name="detailUrlKey">detailUrl</string>
+    <string name="somethingWentWrong">Something went wrong</string>
+    <string name="baseUrl">https://newsapi.org/</string>
+
+    <string-array name="sourceList">
+        <item>google-news-in</item>
+        <item>google-news</item>
+        <item>the-times-of-india</item>
+        <item>espn</item>
+        <item>hacker-news</item>
+        <item>cnn</item>
+        <item>bloomberg</item>
+        <item>entertainment-weekly</item>
+        <item>financial-post</item>
+        <item>financial-times</item>
+    </string-array>
 </resources>

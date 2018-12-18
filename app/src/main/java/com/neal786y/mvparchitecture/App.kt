@@ -16,9 +16,9 @@ class App : Application() {
 
     lateinit var component: ApiComponent
 
-    val baseUrl = "https://newsapi.org/"
     override fun onCreate() {
         super.onCreate()
+        val baseUrl = getString(R.string.baseUrl)
         component = DaggerApiComponent.builder()
                 .appModule(AppModule(this))
                 .apiModule(ApiModule(baseUrl))

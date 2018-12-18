@@ -10,17 +10,18 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
-class MainInteractor(retrofit: Retrofit) : Interactor<NewsResponse> {
+class MainInteractor(retrofit: Retrofit,var source: String) : Interactor<NewsResponse> {
 
     val mRetrofit = retrofit
 
     var mNewsResponseCallback: ResponseCallback<NewsResponse>? = null
 
+
     override fun run() {
 
         val apiClient = mRetrofit.create<ApiInterface>(ApiInterface::class.java)
 
-        val call = apiClient.getNewsData("espn-cric-info", Constants.API_KEY)
+        val call = apiClient.getNewsData(source, Constants.API_KEY)
 
         call.enqueue(object : Callback<NewsResponse> {
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {

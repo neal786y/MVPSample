@@ -15,21 +15,22 @@ import android.view.ViewGroup
 
     override fun getItemCount(): Int = listOfItems.size
 
-    override fun onBindViewHolder(viewHolder: T, position: Int) {
-        viewHolder.loadData(listOfItems.get(position))
-    }
-
-     fun addAll(list: List<O>){
-         listOfItems.clear()
-         listOfItems.addAll(list)
-         notifyChange()
+     fun addAll(list: List<O>?){
+         list?.let {
+             listOfItems.clear()
+             listOfItems.addAll(list)
+             notifyChange()
+         }
      }
 
      fun getList(): List<O> = listOfItems
 
-     fun appendList(list: List<O>){
-         listOfItems.addAll(list)
-         notifyChange()
+     fun appendList(list: List<O>?){
+         list?.let {
+             listOfItems.addAll(list)
+             notifyChange()
+         }
+
      }
 
      fun clearData() {
@@ -38,9 +39,11 @@ import android.view.ViewGroup
      }
 
 
-     fun add(o: O) {
-         listOfItems.add(o)
-         notifyChange()
+     fun add(o: O?) {
+         o?.let {
+             listOfItems.add(o)
+             notifyChange()
+         }
      }
 
      fun getListSize(): Int {

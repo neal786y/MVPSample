@@ -9,6 +9,10 @@ import com.neal786y.mvparchitecture.main.viewholder.NewsItemViewHolder
 
 class NewsAdapter : BaseAdapter<NewsResponse.Article, NewsItemViewHolder>() {
 
+    override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
+        holder.loadData(listOfItems.get(position))
+    }
+
     override fun getViewHolder(viewGroup: ViewGroup, viewType: Int): NewsItemViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
         val view = inflater.inflate(R.layout.article_row, viewGroup, false)

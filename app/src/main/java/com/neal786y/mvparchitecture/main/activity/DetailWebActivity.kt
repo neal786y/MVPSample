@@ -17,40 +17,23 @@ class DetailWebActivity : BaseActivity<DetailWebView, DetailWebPresenter>() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val detailUrl = intent?.extras?.getString("detailUrl")
+        val detailUrl = intent?.extras?.getString(getString(R.string.detailUrlKey))
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = WebViewClient()
-        webView.loadUrl(detailUrl)
-
+        detailUrl?.let {
+            webView.loadUrl(detailUrl)
+        }
     }
 
-    override fun hideLoading() {
+    override fun hideLoading() {}
 
+    override fun showLoading() {}
 
-    }
+    override fun onLoad(data: Any) {}
 
-    override fun showLoading() {
+    override fun onError(error: Any) {}
 
+    override fun onNetworkAvailable() {}
 
-    }
-
-    override fun onLoad(data: Any) {
-
-
-    }
-
-    override fun onError(error: Any) {
-
-
-    }
-
-    override fun onNetworkAvailable() {
-
-
-    }
-
-    override fun onNetworkLost() {
-
-
-    }
+    override fun onNetworkLost() {}
 }
