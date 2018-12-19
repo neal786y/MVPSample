@@ -40,10 +40,7 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
         component.inject(this)
 
         initView()
-    }
 
-    override fun onResume() {
-        super.onResume()
         if (isNetworkAvailable()) onNetworkAvailable()
         else onNetworkLost()
     }
@@ -64,6 +61,7 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
 
         sourceAdapter?.onSourceItemClickListener = object : SourceAdapter.OnSourceItemClickListener {
             override fun onSourceClick(source: String) {
+                showLoading()
                 selectedResource = source
                 presenter?.loadNews(retrofit, selectedResource)
             }
@@ -101,6 +99,7 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
     }
 
     override fun onNetworkAvailable() {
+        showLoading()
         presenter?.loadNews(retrofit, selectedResource)
     }
 
