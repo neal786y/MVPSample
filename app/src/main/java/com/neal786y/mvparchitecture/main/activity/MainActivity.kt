@@ -27,17 +27,22 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
     @Inject
     lateinit var retrofit: Retrofit
 
-    var adapter: NewsAdapter? = null
-    var sourceAdapter: SourceAdapter? = null
+    @Inject
+    lateinit var mainPresenter: MainPresenter
+
+    @Inject
+    lateinit var adapter: NewsAdapter
+
+    @Inject
+    lateinit var sourceAdapter: SourceAdapter
 
     override fun getLayout(): Int = R.layout.activity_main
 
-    override fun initPresenter(): MainPresenter = MainPresenter()
+    override fun initPresenter(): MainPresenter = mainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         component.inject(this)
+        super.onCreate(savedInstanceState)
 
         initView()
 
@@ -49,17 +54,15 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
 
         selectedResource = getString(R.string.default_source)
 
-        adapter = NewsAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         val sourceList = resources.getStringArray(R.array.sourceList).toCollection(ArrayList<String>())
-        sourceAdapter = SourceAdapter()
         recyclerViewSource.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewSource.adapter = sourceAdapter
-        sourceAdapter?.addAll(sourceList)
+        sourceAdapter.addAll(sourceList)
 
-        sourceAdapter?.onSourceItemClickListener = object : SourceAdapter.OnSourceItemClickListener {
+        sourceAdapter.onSourceItemClickListener = object : SourceAdapter.OnSourceItemClickListener {
             override fun onSourceClick(source: String) {
                 showLoading()
                 selectedResource = source
@@ -84,7 +87,7 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
     override fun onLoad(data: Any) {
         runOnUiThread {
             when (data) {
-                is NewsResponse -> adapter?.addAll(data.articles)
+                is NewsResponse -> adapter.addAll(data.articles)
             }
         }
     }

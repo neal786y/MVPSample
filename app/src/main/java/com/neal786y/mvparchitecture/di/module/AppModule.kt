@@ -12,9 +12,7 @@ class AppModule(application: Application) {
 
     @Provides
     @Singleton
-    fun provideApplication(): Application {
-        return mApplication
-    }
+    fun provideApplication(): Application = mApplication
 
 
 }

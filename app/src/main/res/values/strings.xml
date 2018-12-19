@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MVPArchitecture</string>
+    <string name="app_name">NewsBuzz</string>
     <string name="article_image_description">Article Image Description</string>
     <string name="default_source">google-news-in</string>
     <string name="no_internet_text">No internet connection</string>

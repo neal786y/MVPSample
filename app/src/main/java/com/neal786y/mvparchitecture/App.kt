@@ -2,14 +2,16 @@ package com.neal786y.mvparchitecture
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkRequest
+import android.os.Build
 import com.neal786y.mvparchitecture.di.component.ApiComponent
+import com.neal786y.mvparchitecture.di.component.DaggerApiComponent
+import com.neal786y.mvparchitecture.di.module.AdapterModule
 import com.neal786y.mvparchitecture.di.module.ApiModule
 import com.neal786y.mvparchitecture.di.module.AppModule
+import com.neal786y.mvparchitecture.di.module.PresenterModule
 import com.neal786y.mvparchitecture.network.NetworkChangeCallback
-import android.net.NetworkRequest
-import android.net.ConnectivityManager
-import android.os.Build
-import com.neal786y.mvparchitecture.di.component.DaggerApiComponent
 
 
 class App : Application() {
@@ -20,9 +22,11 @@ class App : Application() {
         super.onCreate()
         val baseUrl = getString(R.string.baseUrl)
         component = DaggerApiComponent.builder()
-                .appModule(AppModule(this))
-                .apiModule(ApiModule(baseUrl))
-                .build()
+            .appModule(AppModule(this))
+            .apiModule(ApiModule(baseUrl))
+            .presenterModule(PresenterModule())
+            .adapterModule(AdapterModule())
+            .build()
 
         registerConnectivityNetworkMonitorForAPI21AndUp();
 
